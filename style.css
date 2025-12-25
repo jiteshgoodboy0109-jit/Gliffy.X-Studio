@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Custom scroll behavior for smooth navigation */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Hero gradient background for digital flow effect */
+.hero-bg {
+    background: linear-gradient(180deg, #0A0A1F 0%, #171730 100%);
+    position: relative;
+    /* Needed for particle canvas positioning */
+    overflow: hidden;
+    /* Ensure particles don't bleed out */
+}
+
+/* NEW: Canvas container for Three.js particles */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Below content, above background */
+    opacity: 0.3;
+}
+
+/* Center the content above the particles */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section gradient separators */
+.section-separator {
+    height: 4px;
+    background: linear-gradient(90deg, #E91E63 0%, #25A7F6 100%);
+    margin: 4rem auto;
+    width: 80%;
+    border-radius: 9999px;
+}
+
+/* Accent text gradient */
+.gradient-text {
+    background: linear-gradient(90deg, #E91E63 0%, #25A7F6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* High-quality card design */
+.glow-card {
+    background-color: #1F2937;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glow-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(37, 167, 246, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.glow-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(37, 167, 246, 0.2), 0 4px 6px -2px rgba(37, 167, 246, 0.1);
+    transform: translateY(-5px);
+}
+
+.glow-card:hover::before {
+    opacity: 0.5;
+}
+
+/* Specific styles for the logo image in the header */
+.header-logo {
+    filter: drop-shadow(0 0 5px rgba(233, 30, 99, 0.7));
+}
+
+/* Animation for subtle background glow pulse */
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.35;
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 6s infinite ease-in-out;
+}
+
+/* NEW: Scroll Reveal Classes (elements start hidden and translated) */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+/* When the element is in view, apply the 'visible' state */
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* NEW: 3D Image Card Styles */
+.perspective-container {
+    perspective: 1000px;
+}
+
+.transform-3d-card {
+    transform: rotateY(-12deg) rotateX(6deg) scale(0.95);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
+    box-shadow: -20px 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* On hover, the card straightens up and "pops" */
+.perspective-container:hover .transform-3d-card {
+    transform: rotateY(0deg) rotateX(0deg) scale(1);
+    box-shadow: 0 20px 50px rgba(37, 167, 246, 0.3); /* Blue glow on hover */
+    z-index: 50;
+}
+
+/* NEW: Floating Animation for Logo */
+@keyframes float-logo {
+    0%, 100% { 
+        transform: translateY(0); 
+        filter: drop-shadow(0 5px 15px rgba(233, 30, 99, 0.4)); 
+    }
+    50% { 
+        transform: translateY(-20px); 
+        filter: drop-shadow(0 25px 25px rgba(37, 167, 246, 0.4)); 
+    }
+}
+
+.animate-float {
+    animation: float-logo 6s ease-in-out infinite;
+}
+
+/* NEW: Shimmering Text Animation */
+@keyframes text-shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.gradient-text-animated {
+    background: linear-gradient(270deg, #E91E63, #a855f7, #25A7F6, #E91E63);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    animation: text-shimmer 5s ease infinite;
+}
+
+/* NEW: Premium 3D Tilt Card Styles for Web Dev Section */
+.premium-card {
+    background-color: rgba(31, 41, 55, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.1s ease-out, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.translate-z-10 {
+    transform: translateZ(30px);
+}
+
+/* NEW: Focus Animation for Inputs */
+.input-premium:focus {
+    box-shadow: 0 0 20px rgba(233, 30, 99, 0.3);
+    border-color: #E91E63;
+    transform: scale(1.02);
+}
+
+/* NEW: Contact Section Background Grid */
+.cyber-grid-bg {
+    background-image: 
+        linear-gradient(rgba(37, 167, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 167, 246, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(to bottom, transparent, black, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 40%, black 70%, transparent 95%);
+}
+
+/* NEW: Success Animation Styles */
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #25A7F6; /* Changed to Blue to match theme */
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #25A7F6;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+/* Star Rating Styles - UPDATED for Gold/Attractive Look */
+.star-icon {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+.star-icon:hover {
+    transform: scale(1.2) rotate(5deg);
+    filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.6)); /* Yellow glow on hover */
+}
+
+/* Active Star Class (Yellow & Glowing) */
+.star-filled {
+    color: #FACC15; /* Tailwind Yellow-400 */
+    fill: #FACC15;
+    filter: drop-shadow(0 0 5px rgba(250, 204, 21, 0.4));
+}
+
+/* Inactive Star Class */
+.star-empty {
+    color: #4B5563; /* Gray-600 */
+    fill: none;
+}
+
+@keyframes stroke {
+    100% { stroke-dashoffset: 0; }
+}
+@keyframes scale {
+    0%, 100% { transform: none; }
+    50% { transform: scale3d(1.1, 1.1, 1); }
+}
+@keyframes fill {
+    100% { box-shadow: inset 0px 0px 0px 30px #25A7F6; }
+}
+
+/* Animation for the form hiding */
+.form-exit {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    filter: blur(10px);
+    transition: all 0.5s ease-in-out;
+}

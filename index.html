@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLIFFY.X STDIO - The Future of Digital Marketing</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic use -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load Three.js for Particle Background (Advanced Animation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Load Canvas Confetti for Grand Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Load GSAP (Advanced Animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#0A0A1F',
+                        'accent-pink': '#E91E63',
+                        'accent-blue': '#25A7F6',
+                        'card-bg': '#1F2937',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-primary-dark text-gray-100 font-sans min-h-screen">
+
+    <!-- Fixed Header and Navigation -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-primary-dark bg-opacity-95 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <!-- Logo Area -->
+            <a href="#home" class="flex items-center space-x-3 group" onclick="navigate(event, 'home')">
+                <img src="https://lh3.googleusercontent.com/d/1x_6YSWI8Xnjo7mdpss-AzIoLo3sr2Glc" alt="Home" class="logo"
+                    width="100" height="auto">
+
+                <span class="text-xl font-extrabold tracking-wider">
+                    GLIFFY.X <span class="text-accent-blue">STDIO</span>
+                </span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#home" class="text-gray-300 hover:text-accent-pink transition duration-300"
+                    onclick="navigate(event, 'home')">Home</a>
+                <a href="#marketing" class="text-gray-300 hover:text-accent-pink transition duration-300"
+                    onclick="navigate(event, 'marketing')">Content & Marketing</a>
+                <a href="#branding" class="text-gray-300 hover:text-accent-pink transition duration-300"
+                    onclick="navigate(event, 'branding')">Future Branding</a>
+                <a href="#ads" class="text-gray-300 hover:text-accent-pink transition duration-300"
+                    onclick="navigate(event, 'ads')">Ads & Media</a>
+                <a href="#webdev" class="text-gray-300 hover:text-accent-pink transition duration-300"
+                    onclick="navigate(event, 'webdev')">Web Dev</a>
+                <a href="#contact"
+                    class="px-4 py-2 bg-accent-pink rounded-lg hover:bg-opacity-80 transition duration-300 shadow-lg shadow-accent-pink/40"
+                    onclick="navigate(event, 'contact')">Contact Us</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button"
+                class="md:hidden p-2 rounded-full hover:bg-gray-800 transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="4" x2="20" y1="12" y2="12" />
+                    <line x1="4" x2="20" y1="6" y2="6" />
+                    <line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Drawer (Hidden by default) -->
+    <div id="mobile-menu"
+        class="fixed top-20 left-0 w-full bg-primary-dark z-40 md:hidden h-0 overflow-hidden transition-all duration-300">
+        <nav class="flex flex-col p-4 space-y-4 text-lg">
+            <a href="#home"
+                class="text-gray-300 hover:text-accent-pink transition duration-300 py-2 border-b border-gray-800"
+                onclick="navigate(event, 'home')">Home</a>
+            <a href="#marketing"
+                class="text-gray-300 hover:text-accent-pink transition duration-300 py-2 border-b border-gray-800"
+                onclick="navigate(event, 'marketing')">Content & Marketing</a>
+            <a href="#branding"
+                class="text-gray-300 hover:text-accent-pink transition duration-300 py-2 border-b border-gray-800"
+                onclick="navigate(event, 'branding')">Future Branding</a>
+            <a href="#ads"
+                class="text-gray-300 hover:text-accent-pink transition duration-300 py-2 border-b border-gray-800"
+                onclick="navigate(event, 'ads')">Ads & Media</a>
+            <a href="#webdev"
+                class="text-gray-300 hover:text-accent-pink transition duration-300 py-2 border-b border-gray-800"
+                onclick="navigate(event, 'webdev')">Web Dev</a>
+            <a href="#contact" class="text-gray-300 hover:text-accent-pink transition duration-300 py-2"
+                onclick="navigate(event, 'contact')">Contact Us</a>
+        </nav>
+    </div>
+
+    <main class="pt-20">
+
+        <!-- SECTION 1: HOME/INTRODUCTION (Particle Background is added here) -->
+        <section id="home" class="hero-bg py-12 sm:py-32 flex items-center min-h-screen">
+            <!-- Three.js Canvas Container -->
+            <div id="particle-canvas"></div>
+
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-4xl hero-content">
+
+                <!-- NEW: Logo with glowing background -->
+                <div class="mb-6 sm:mb-10 flex justify-center relative scroll-reveal" style="transition-delay: 0.1s;">
+                    <!-- Background element for "matchable color" glow effect -->
+                    <div
+                        class="absolute inset-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-60 sm:h-60 rounded-full bg-accent-pink opacity-20 blur-3xl animate-pulse-slow">
+                    </div>
+                    <!-- Updated Logo with Floating Animation -->
+                    <img src="https://lh3.googleusercontent.com/d/1x_6YSWI8Xnjo7mdpss-AzIoLo3sr2Glc" alt="Home"
+                        class="logo animate-float w-32 sm:w-[200px]" height="auto">
+
+
+                </div>
+                <!-- END NEW -->
+
+                <h1 class="text-4xl sm:text-7xl font-extrabold mb-4 sm:mb-6 leading-tight scroll-reveal"
+                    style="transition-delay: 0.2s;">
+                    <!-- Updated Title with Shimmering Animation -->
+                    <span class="gradient-text-animated">GLIFFY.X STDIO</span>
+
+                </h1>
+                <h1 class="text-3xl sm:text-6xl font-extrabold mb-4 sm:mb-6 leading-tight scroll-reveal"
+                    style="transition-delay: 0.3s;">
+                    <span class="block text-gray-200 mt-2">Rooted in Culture, Powered by Ai .</span>
+
+                </h1>
+                <p class="text-base sm:text-2xl text-gray-400 mb-8 sm:mb-10 max-w-2xl mx-auto scroll-reveal"
+                    style="transition-delay: 0.4s;">
+                    Highlights the use of cutting-edge technology to enhance creativity, efficiency, and impact,
+                    Implies smart tools, automation, and data-driven strategies are behind your digital excellence,
+                    It’s about innovation, scalability, and staying ahead in the digital game.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 scroll-reveal"
+                    style="transition-delay: 0.5s;">
+                    <a href="#marketing"
+                        class="inline-flex items-center justify-center px-6 py-3 text-base sm:text-lg font-semibold bg-accent-pink rounded-full hover:bg-opacity-90 transition duration-300 shadow-2xl shadow-accent-pink/50 transform hover:scale-105 w-full sm:w-auto"
+                        onclick="navigate(event, 'marketing')">
+                        Explore Services
+                    </a>
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-6 py-3 text-base sm:text-lg font-semibold border-2 border-accent-blue text-accent-blue rounded-full hover:bg-accent-blue hover:text-white transition duration-300 transform hover:scale-105 w-full sm:w-auto"
+                        onclick="navigate(event, 'contact')">
+                        Talk to an Expert
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator scroll-reveal"></div>
+
+        <!-- SECTION 2: CONTENT CREATION & MARKETING -->
+        <section id="marketing" class="py-12 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-5xl font-bold text-center mb-10 sm:mb-16 scroll-reveal">
+                    Content <span class="gradient-text">&</span> Marketing Mastery
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6 lg:gap-12">
+                    <!-- Content Creation Card -->
+                    <div class="glow-card p-6 sm:p-10 scroll-reveal" style="transition-delay: 0.1s;">
+                        <div class="text-accent-pink mb-4">
+                            <i data-lucide="pen-tool" class="w-8 h-8 sm:w-10 sm:h-10"></i>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4">Content Creation</h3>
+                        <p class="text-gray-400 text-base sm:text-lg">
+                            We develop high-impact, story-driven content that resonates with your target audience.
+                            From viral videos and engaging blog posts to sophisticated whitepapers, our creations
+                            are designed for authority and organic reach.
+                        </p>
+                        <ul class="mt-6 space-y-3 text-gray-300 text-sm sm:text-base">
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 mr-2 text-accent-blue"></i> SEO-Optimized Articles</li>
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 mr-2 text-accent-blue"></i> Video & Motion Graphics</li>
+                            <li class="flex items-center"><i data-lucide="check-circle"
+                                    class="w-5 h-5 mr-2 text-accent-blue"></i> Lead-Generating Ebooks</li>
+                        </ul>
+                    </div>
+                    <!-- Marketing Card -->
+                    <div class="glow-card p-6 sm:p-10 scroll-reveal" style="transition-delay: 0.2s;">
+                        <div class="text-accent-blue mb-4">
+                            <i data-lucide="trending-up" class="w-8 h-8 sm:w-10 sm:h-10"></i>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-bold mb-4">Marketing</h3>
+                        <p class="text-gray-400 text-base sm:text-lg">
+                            Our holistic marketing strategies ensure your message reaches the right people at the
+                            right time. We focus on measurable results, driving conversions and maximizing your ROI
+                            across all digital channels.
+                        </p>
+                        <ul class="mt-6 space-y-3 text-gray-300 text-sm sm:text-base">
+                            <li class="flex items-center"><i data-lucide="zap"
+                                    class="w-5 h-5 mr-2 text-accent-pink"></i> Performance-Based Campaigns</li>
+                            <li class="flex items-center"><i data-lucide="zap"
+                                    class="w-5 h-5 mr-2 text-accent-pink"></i> Multi-Channel Distribution</li>
+                            <li class="flex items-center"><i data-lucide="zap"
+                                    class="w-5 h-5 mr-2 text-accent-pink"></i> Conversion Rate Optimization (CRO)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator scroll-reveal"></div>
+
+        <!-- SECTION 3: FUTURE BRANDING & SMART STRATEGY -->
+        <section id="branding" class="py-12 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-5xl font-bold text-center mb-10 sm:mb-16 scroll-reveal">
+                    Future Branding: <span class="gradient-text">Smart Strategy</span>
+                </h2>
+                <div class="max-w-3xl mx-auto space-y-8 sm:space-y-12">
+                    <div class="glow-card p-6 sm:p-8 scroll-reveal" style="transition-delay: 0.1s;">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-accent-blue mb-3 flex items-center"><i
+                                data-lucide="crown" class="w-6 h-6 mr-2"></i> Future Branding</h3>
+                        <p class="text-gray-400 text-sm sm:text-base">
+                            Building a future-proof brand requires foresight. We look beyond current trends to
+                            establish an identity that is scalable, resilient, and ready for emerging digital
+                            ecosystems, ensuring lasting market relevance.
+                        </p>
+                    </div>
+                    <div class="glow-card p-6 sm:p-8 scroll-reveal" style="transition-delay: 0.2s;">
+                        <h3 class="text-xl sm:text-2xl font-semibold text-accent-pink mb-3 flex items-center"><i
+                                data-lucide="lightbulb" class="w-6 h-6 mr-2"></i> Smart Strategy for Future Brand
+                        </h3>
+                        <p class="text-gray-400 text-sm sm:text-base">
+                            Our strategic roadmap focuses on digital innovation, ethical AI integration, and
+                            community-centric engagement. This smart strategy guarantees your brand narrative
+                            remains compelling and consistent across all future platforms.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="text-center mt-10 sm:mt-16 scroll-reveal" style="transition-delay: 0.3s;">
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-6 py-3 text-base sm:text-lg font-semibold border-2 border-accent-pink text-accent-pink rounded-full hover:bg-accent-pink hover:text-white transition duration-300 transform hover:scale-105"
+                        onclick="navigate(event, 'contact')">
+                        Start Your Brand Evolution
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator scroll-reveal"></div>
+
+        <!-- SECTION 4: AI & DESIGNED ADS CREATION -->
+        <section id="ads" class="py-12 sm:py-32">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-5xl font-bold text-center mb-10 sm:mb-16 scroll-reveal">
+                    Precision <span class="gradient-text">Advertising</span>
+                </h2>
+                <div class="grid lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- AI Ads -->
+                    <div class="glow-card p-6 scroll-reveal" style="transition-delay: 0.1s;">
+                        <i data-lucide="cpu" class="w-8 h-8 text-accent-blue mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">AI Ads</h3>
+                        <p class="text-gray-400 text-sm sm:text-base">
+                            Leverage advanced AI algorithms for real-time campaign optimization, dynamic creative
+                            generation, and hyper-personalized ad delivery to maximize conversion efficiency.
+                        </p>
+                    </div>
+                    <!-- Designed Ads Creation -->
+                    <div class="glow-card p-6 scroll-reveal" style="transition-delay: 0.2s;">
+                        <i data-lucide="layout" class="w-8 h-8 text-accent-pink mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Designed Ads Creation</h3>
+                        <p class="text-gray-400 text-sm sm:text-base">
+                            Stunning visual ads crafted by our professional designers ensure your brand stands out,
+                            capturing attention and communicating value instantly on every platform.
+                        </p>
+                    </div>
+                    <!-- Media Promotions -->
+                    <div class="glow-card p-6 scroll-reveal" style="transition-delay: 0.3s;">
+                        <i data-lucide="megaphone" class="w-8 h-8 text-accent-blue mb-3"></i>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">Media Promotions</h3>
+                        <p class="text-gray-400 text-sm sm:text-base">
+                            Strategic placement and promotion across high-value media channels (social, search,
+                            programmatic) guarantee maximum visibility and audience engagement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator scroll-reveal"></div>
+
+        <!-- SECTION 5: PREMIUM WEB DEVELOPMENT (3D Animation) -->
+        <section id="webdev"
+            class="py-12 md:py-32 relative overflow-hidden min-h-[50vh] sm:min-h-[70vh] flex items-center bg-[#0A0A1F]">
+            <div id="webdev-canvas" class="absolute inset-0 z-0"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-primary-dark via-transparent to-primary-dark z-0 opacity-90">
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="max-w-4xl mx-auto text-center scroll-reveal">
+                    <div
+                        class="inline-block px-3 py-1 mb-4 border border-accent-blue/30 rounded-full bg-accent-blue/10 backdrop-blur-md">
+                        <span class="text-accent-blue text-xs md:text-sm font-bold tracking-widest uppercase">Premium
+                            Architecture</span>
+                    </div>
+                    <h2
+                        class="text-3xl xs:text-4xl md:text-6xl font-extrabold mb-6 md:mb-8 text-white tracking-tight drop-shadow-2xl">
+                        Next-Gen <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-accent-pink via-purple-500 to-accent-blue block sm:inline">Web
+                            Ecosystems</span>
+                    </h2>
+                    <p class="text-base md:text-2xl text-gray-300 mb-8 md:mb-12 leading-relaxed font-light">
+                        We don't just build websites; we engineer <span class="text-white font-medium">high-performance
+                            digital experiences</span>.
+                        <span class="block mt-2 md:inline opacity-80">Immersive animations. Bulletproof security.
+                            Future-ready.</span>
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-10 md:mb-12 scroll-reveal"
+                    style="transition-delay: 0.2s;">
+                    <div class="premium-card p-6 md:p-8 rounded-2xl flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group hover:border-accent-pink/50 cursor-pointer"
+                        onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                        <div
+                            class="p-3 md:p-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl text-accent-pink shadow-lg mb-4 sm:mb-0 sm:mr-5 group-hover:scale-110 transition duration-300 ring-1 ring-white/10">
+                            <i data-lucide="monitor-smartphone" class="w-6 h-6 md:w-8 md:h-8"></i>
+                        </div>
+                        <div class="transform translate-z-10">
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-2">Ultra-Responsive & SEO Prime</h4>
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed">Flawless performance across
+                                every device. We code with Google's Core Web Vitals in mind, ensuring your site ranks
+                                high and loads instantly.</p>
+                        </div>
+                    </div>
+
+                    <div class="premium-card p-6 md:p-8 rounded-2xl flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left group hover:border-accent-blue/50 cursor-pointer"
+                        onmousemove="handleTilt(event, this)" onmouseleave="resetTilt(this)">
+                        <div
+                            class="p-3 md:p-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl text-accent-blue shadow-lg mb-4 sm:mb-0 sm:mr-5 group-hover:scale-110 transition duration-300 ring-1 ring-white/10">
+                            <i data-lucide="cpu" class="w-6 h-6 md:w-8 md:h-8"></i>
+                        </div>
+                        <div class="transform translate-z-10">
+                            <h4 class="text-lg md:text-xl font-bold text-white mb-2">Modern Tech Stack</h4>
+                            <p class="text-gray-400 text-sm md:text-base leading-relaxed">Powered by cutting-edge
+                                frameworks (React, Next.js). We build scalable, secure architectures that handle growth
+                                effortlessly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center scroll-reveal" style="transition-delay: 0.4s;">
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-10 py-4 text-base sm:text-lg font-bold bg-gradient-to-r from-accent-pink to-accent-blue text-white rounded-full hover:opacity-90 transition duration-500 shadow-2xl shadow-accent-pink/20 transform hover:-translate-y-1 w-full sm:w-auto"
+                        onclick="navigate(event, 'contact')">
+                        <i data-lucide="rocket" class="w-5 h-5 mr-2"></i>
+                        Launch Your Digital Empire
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-separator scroll-reveal"></div>
+
+        <!-- SECTION 6: CONTACT US (Redesigned: Bigger & Animated) -->
+        <section id="contact" class="py-12 md:py-40 bg-[#080816] relative overflow-hidden">
+            <!-- Cyber Grid Background -->
+            <div class="absolute inset-0 cyber-grid-bg opacity-30 pointer-events-none"></div>
+            <!-- Glowing Orb Background -->
+            <div
+                class="absolute top-1/2 right-0 -translate-y-1/2 w-96 h-96 bg-accent-blue/10 rounded-full blur-[100px] pointer-events-none">
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <h2
+                    class="text-3xl sm:text-5xl md:text-7xl font-bold text-center mb-10 md:mb-20 scroll-reveal tracking-tight">
+                    Ready to <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-accent-pink to-accent-blue">Dominate?</span>
+                </h2>
+
+                <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
+
+                    <!-- Left Side: Interactive Contact Info -->
+                    <div class="space-y-6 md:space-y-10 scroll-reveal" style="transition-delay: 0.1s;">
+                        <div class="space-y-4">
+                            <h3 class="text-3xl sm:text-4xl font-semibold text-white">Let's Build Something <br> <span
+                                    class="text-gray-500">Extraordinary.</span></h3>
+                            <p class="text-base sm:text-xl text-gray-400 max-w-md">Stop scrolling. Start scaling. Reach
+                                out now for a
+                                consultation that could redefine your brand's future.</p>
+                        </div>
+
+                        <div class="space-y-4 sm:space-y-6">
+                            <!-- Phone -->
+                            <a href="tel:8220945226"
+                                class="flex items-center p-4 rounded-2xl bg-gray-900/50 hover:bg-gray-800 transition duration-300 group border border-transparent hover:border-accent-pink/30">
+                                <div
+                                    class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent-pink/10 flex items-center justify-center mr-4 sm:mr-5 group-hover:scale-110 transition duration-300">
+                                    <i data-lucide="phone" class="w-5 h-5 sm:w-6 sm:h-6 text-accent-pink"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-bold">Call
+                                        Us Direct
+                                    </p>
+                                    <p
+                                        class="text-xl sm:text-2xl font-bold text-white group-hover:text-accent-pink transition">
+                                        8220945226</p>
+                                </div>
+                            </a>
+
+                            <!-- Email -->
+                            <a href="mailto:gliffy.xstdio@gmail.com"
+                                class="flex items-center p-4 rounded-2xl bg-gray-900/50 hover:bg-gray-800 transition duration-300 group border border-transparent hover:border-accent-blue/30">
+                                <div
+                                    class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent-blue/10 flex items-center justify-center mr-4 sm:mr-5 group-hover:scale-110 transition duration-300">
+                                    <i data-lucide="mail" class="w-5 h-5 sm:w-6 sm:h-6 text-accent-blue"></i>
+                                </div>
+                                <div class="overflow-hidden">
+                                    <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-bold">Email
+                                        Support
+                                    </p>
+                                    <p
+                                        class="text-lg sm:text-xl font-bold text-white group-hover:text-accent-blue transition truncate">
+                                        gliffy.xstdio@gmail.com</p>
+                                </div>
+                            </a>
+
+                            <!-- Instagram (New Styled Block) -->
+                            <a href="https://ig.me/m/GLIFFYXSTDIO" target="_blank"
+                                class="flex items-center p-4 rounded-2xl bg-gray-900/50 hover:bg-gray-800 transition duration-300 group border border-transparent hover:border-accent-pink/30">
+                                <div
+                                    class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-accent-pink/10 flex items-center justify-center mr-4 sm:mr-5 group-hover:scale-110 transition duration-300">
+                                    <i data-lucide="instagram" class="w-5 h-5 sm:w-6 sm:h-6 text-accent-pink"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-bold">
+                                        Instagram</p>
+                                    <p
+                                        class="text-lg sm:text-xl font-bold text-white group-hover:text-accent-pink transition">
+                                        @GLIFFYXSTDIO</p>
+                                </div>
+                            </a>
+
+                            <!-- QR Code Only (Removed duplicate link text) -->
+                            <div class="pt-4 hidden sm:block">
+                                <p class="text-gray-400 mb-3 text-sm font-medium">Scan to connect instantly:</p>
+                                <img src="https://lh3.googleusercontent.com/d/1_9MmW1VCYli48mg4zB72vRY3QFTTSFZW"
+                                    alt="gliffyxstdio_qr"
+                                    class="w-32 h-32 rounded-xl shadow-lg border border-gray-700 hover:scale-105 transition" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Side: Form (No 3D Effect) -->
+                    <div class="premium-card p-6 sm:p-10 md:p-12 rounded-3xl scroll-reveal relative group"
+                        style="transition-delay: 0.2s;">
+
+                        <!-- Decorative Elements within card -->
+                        <div
+                            class="absolute -top-10 -right-10 w-32 h-32 bg-accent-pink/20 rounded-full blur-2xl group-hover:bg-accent-pink/30 transition duration-500">
+                        </div>
+
+                        <div class="transform translate-z-10 relative z-20">
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white mb-6 sm:mb-8">Send a Message</h3>
+                            <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6 sm:space-y-8">
+                                <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
+                                    <div class="space-y-2">
+                                        <label for="name"
+                                            class="text-xs sm:text-sm font-medium text-accent-blue uppercase tracking-wider">Name</label>
+                                        <input type="text" id="name" name="name" placeholder="John Doe" required
+                                            class="input-premium w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-900/80 border border-gray-700 rounded-xl focus:outline-none transition-all duration-300 text-base sm:text-lg text-white placeholder-gray-600">
+                                    </div>
+                                    <!-- Replaced Email with Star Rating -->
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-xs sm:text-sm font-medium text-accent-blue uppercase tracking-wider">Rate
+                                            Us</label>
+                                        <div class="flex space-x-2 items-center h-full pt-1 sm:pt-2">
+                                            <input type="hidden" id="rating" name="rating" value="5">
+                                            <!-- Stars generated dynamically or statically -->
+                                            <div class="flex space-x-1 cursor-pointer" id="star-container">
+                                                <!-- Star 1 -->
+                                                <svg onclick="setRating(1)"
+                                                    class="w-6 h-6 sm:w-8 sm:h-8 star-icon star-filled"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polygon
+                                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                    </polygon>
+                                                </svg>
+                                                <!-- Star 2 -->
+                                                <svg onclick="setRating(2)"
+                                                    class="w-6 h-6 sm:w-8 sm:h-8 star-icon star-filled"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polygon
+                                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                    </polygon>
+                                                </svg>
+                                                <!-- Star 3 -->
+                                                <svg onclick="setRating(3)"
+                                                    class="w-6 h-6 sm:w-8 sm:h-8 star-icon star-filled"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polygon
+                                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                    </polygon>
+                                                </svg>
+                                                <!-- Star 4 -->
+                                                <svg onclick="setRating(4)"
+                                                    class="w-6 h-6 sm:w-8 sm:h-8 star-icon star-filled"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polygon
+                                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                    </polygon>
+                                                </svg>
+                                                <!-- Star 5 -->
+                                                <svg onclick="setRating(5)"
+                                                    class="w-6 h-6 sm:w-8 sm:h-8 star-icon star-filled"
+                                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <polygon
+                                                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                                    </polygon>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="message"
+                                        class="text-xs sm:text-sm font-medium text-accent-blue uppercase tracking-wider">Your
+                                        Vision / Message</label>
+                                    <textarea id="message" name="message" rows="5"
+                                        placeholder="Tell us about your project..." required
+                                        class="input-premium w-full px-4 sm:px-6 py-3 sm:py-4 bg-gray-900/80 border border-gray-700 rounded-xl focus:outline-none transition-all duration-300 text-base sm:text-lg text-white placeholder-gray-600 resize-none"></textarea>
+                                </div>
+                                <!-- Changed Button to Brand Gradient (Pink to Blue) -->
+                                <button type="submit"
+                                    class="w-full py-4 sm:py-5 bg-gradient-to-r from-accent-pink to-accent-blue rounded-xl font-bold text-lg sm:text-xl text-white shadow-lg shadow-accent-pink/25 hover:shadow-accent-pink/50 hover:scale-[1.02] active:scale-95 transition-all duration-300 flex justify-center items-center group">
+                                    <span>Send via WhatsApp</span>
+                                    <i data-lucide="message-circle"
+                                        class="w-5 h-5 sm:w-6 sm:h-6 ml-3 group-hover:translate-x-1 transition-transform"></i>
+                                </button>
+                            </form>
+                            <div id="form-message" class="mt-6 text-center hidden w-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary-dark border-t border-gray-800 py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500 text-sm">
+            <p>&copy; <span id="current-year"></span> GLIFFY.X STDIO. All Rights Reserved.</p>
+            <p class="mt-2">The Future of Digital Marketing, Engineered by You.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity and Advanced Animations -->
+    <script src="script.js"></script>
+    <!-- Custom Cursor Element -->
+    <div id="custom-cursor" class="hidden md:block"></div>
+
+</body>
+
+</html>
