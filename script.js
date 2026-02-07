@@ -342,4 +342,38 @@ window.onload = function () {
     initParticles(); // Start the 3D particle background (Hero)
     initWebDevParticles(); // Start Web Dev 3D BG
     setupScrollReveal(); // Setup the scroll-in-view animations
+
+    // INTEGRATED HOME VIDEO HANDLING
+    const homeVideoContainer = document.getElementById('home-video-container');
+    const homeVideo = document.getElementById('home-intro-video');
+    const heroContent = document.querySelector('.hero-content');
+
+    if (homeVideo && homeVideoContainer && heroContent) {
+
+        // Browser Autoplay Policy: Muted by default. 
+        // Best effort: Unmute if the user clicks anywhere on the page.
+        const unmuteVideo = () => {
+            homeVideo.muted = false;
+            // Success! Remove listener
+            window.removeEventListener('click', unmuteVideo);
+        };
+        window.addEventListener('click', unmuteVideo);
+
+        // Function to reveal home content
+        const revealHomeContent = () => {
+            homeVideoContainer.style.opacity = '0';
+            setTimeout(() => {
+                homeVideoContainer.style.display = 'none';
+                // Reveal Hero Content
+                heroContent.classList.remove('opacity-0');
+                heroContent.classList.add('opacity-100');
+            }, 1000);
+        };
+
+        // When video ends
+        homeVideo.addEventListener('ended', revealHomeContent);
+
+        // Optional: Manual skip on double click
+        homeVideoContainer.addEventListener('dblclick', revealHomeContent);
+    }
 }
